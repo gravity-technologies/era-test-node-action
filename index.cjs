@@ -9,6 +9,9 @@ const ERA_TEST_NODE_RELEASE_TAG = getInput('releaseTag') || 'latest';
 const ERA_TEST_NODE_ARCH = getInput('target') || 'x86_64-unknown-linux-gnu';
 
 async function getDownloadUrl() {
+  if (getInput('downloadUrlOverride')) {
+    return getInput('downloadUrlOverride');
+  }
   let apiUrl;
   if (ERA_TEST_NODE_RELEASE_TAG === 'latest') {
     apiUrl = 'https://api.github.com/repos/matter-labs/era-test-node/releases/latest';
